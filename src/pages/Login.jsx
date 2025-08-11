@@ -40,7 +40,7 @@ export default function Login() {
       </form>
       <p className="register-link">
         Don’t have an account?{" "}
-        <Link to="/register" className="register-btn">Register</Link>
+        <Link to="/register">Register</Link>
       </p>
     </div>
   );
