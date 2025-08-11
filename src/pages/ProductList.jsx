@@ -119,9 +119,9 @@ export default function ProductList() {
               <p>₹{p.price}</p>
 
               {p.countInStock > 0 ? (
-                <p style={{ color: "green" }}>Stock Available: {p.countInStock}</p>
+                <p style={{ color: "green",fontSize: "0.70rem" }}>Stock Available: {p.countInStock}</p>
               ) : (
-                <p style={{ color: "red" }}>Out of Stock</p>
+                <p style={{ color: "red",fontSize: "0.70rem" }}>Out of Stock</p>
               )}
 
               <Link to={`/products/${p._id}`} className="details-button">
