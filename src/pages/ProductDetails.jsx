@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useParams,  useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import API from '../api';
 import { addToCart } from '../api/cartService';
 
 export default function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(1); // ✅ default quantity is 1
+  const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -25,54 +26,88 @@ export default function ProductDetails() {
     alert('Added to cart!');
   };
 
-  if (!product) return <p>Loading...</p>;
+  if (!product) return <p className="loading-text">Loading...</p>;
 
-  return (
-    <div>
-      <h2>{product.name}</h2>
-      <p>Price: ₹{product.price}</p>
-      <p>{product.description}</p>
+return (
+  <div className="product-details">
+    <button
+      onClick={() => navigate('/products')}
+      style={{
+        marginBottom: '1rem',
+        background: 'transparent',
+        border: 'none',
+        color: '#D4AF37',
+        fontSize: '1.5rem',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        padding: 0,
+      }}
+      aria-label="Go back to products"
+    >
+      &larr; Back
+    </button>
 
-      {/* ✅ Stock status */}
-      {product.countInStock > 0 ? (
-        <p style={{ color: 'green' }}>In Stock: {product.countInStock}</p>
-      ) : (
-        <p style={{ color: 'red' }}>Out of Stock</p>
-      )}
+    <div className="product-details-wrapper">
+      <img 
+        src={product.image} 
+        alt={product.name} 
+        className="product-image"
+      />
 
-      {/* ✅ Quantity selector */}
-      {product.countInStock > 0 && (
-        <>
-          <label>
-            Quantity:{' '}
-            <select
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-            >
-              {[...Array(Math.min(10, product.countInStock)).keys()].map((x) => (
-                <option key={x + 1} value={x + 1}>
-                  {x + 1}
-                </option>
-              ))}
-            </select>
-          </label>
-          <br /><br />
-        </>
-      )}
+      <div className="product-info">
+        <div className="product-header">
+  <h2>{product.name}</h2>
+  <p className="price">₹{product.price}</p>
+</div>
 
-      {/* ✅ Add to Cart Button */}
-      <button 
-        onClick={handleAddToCart} 
-        disabled={product.countInStock === 0} 
-        style={{ opacity: product.countInStock === 0 ? 0.5 : 1 }}
+      
+        <p className="description">{product.description}</p>
+
+
+
+{product.countInStock > 0 && (
+  <div className="stock-buttons-container">
+    <div className="stock-quantity-container">
+      <p className="in-stock">In Stock: {product.countInStock}</p>
+      <div className="quantity-container">
+        <label htmlFor="quantity">Quantity: </label>
+        <select
+          id="quantity"
+          value={quantity}
+          onChange={(e) => setQuantity(Number(e.target.value))}
+          className="quantity-select"
+        >
+          {[...Array(Math.min(10, product.countInStock)).keys()].map((x) => (
+            <option key={x + 1} value={x + 1}>
+              {x + 1}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <div className="product-buttons">
+      <button
+        onClick={handleAddToCart}
+        disabled={product.countInStock === 0}
+        className="gold-button"
       >
         Add to Cart
-        </button>
-
-        <button onClick={() => navigate('/cart')}>
-          Go to Cart
-        </button>
-              
+      </button>
+      <button onClick={() => navigate('/cart')} className="gold-outline-button">
+        Go to Cart
+      </button>
     </div>
-  );
+  </div>
+)}
+
+
+
+
+      </div>
+    </div>
+  </div>
+);
+
+
 }
