@@ -1,6 +1,7 @@
 import { useState } from "react";
 import API from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import "../index.css";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -8,16 +9,39 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await API.post("/auth/login", form);
-    localStorage.setItem("token", res.data.token);
-    navigate(res.data.user.role === "admin" ? "/admin" : "/home");
+    try {
+      const res = await API.post("/auth/login", form);
+      localStorage.setItem("token", res.data.token);
+      navigate(res.data.user.role === "admin" ? "/admin" : "/home");
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input placeholder="Email" onChange={e => setForm({ ...form, email: e.target.value })} />
-      <input type="password" placeholder="Password" onChange={e => setForm({ ...form, password: e.target.value })} />
-      <button type="submit">Login</button>
-    </form>
+    <div className="login-wrapper">
+      <h2>Welcome Back</h2>
+      <form onSubmit={handleSubmit} className="login-form">
+        <input
+          placeholder="Email"
+          type="email"
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
+          required
+        />
+        <button type="submit" className="login-btn">Login</button>
+      </form>
+      <p className="register-link">
+        Don’t have an account?{" "}
+        <Link to="/register" className="register-btn">Register</Link>
+      </p>
+    </div>
   );
 }
