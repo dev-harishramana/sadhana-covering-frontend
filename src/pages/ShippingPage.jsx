@@ -22,14 +22,14 @@ export default function ShippingPage() {
   };
 
   return (
-    <div>
-      <h2>Shipping Address</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="shipping-container">
+      <h2 className="shipping-heading">Shipping Address</h2>
+      <form className="shipping-form" onSubmit={handleSubmit}>
         <input name="address" placeholder="Address" value={form.address} onChange={handleChange} required />
         <input name="city" placeholder="City" value={form.city} onChange={handleChange} required />
         <input name="postalCode" placeholder="Postal Code" value={form.postalCode} onChange={handleChange} required />
         <input name="country" placeholder="Country" value={form.country} onChange={handleChange} required />
-        <button type="submit">Continue</button>
+        <button className="gold-button" type="submit">Continue</button>
       </form>
     </div>
   );
