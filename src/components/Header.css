@@ -1,0 +1,103 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b58900;
+  padding: 1rem 0 1rem 1rem;
+  position: relative;
+}
+
+.logo a {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.logout-btn {
+  background-color: white;
+  color: #b58900;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout-btn:hover {
+  background-color: #f0e6cc;
+}
+
+/* Mobile styles */
+/* Mobile styles */
+.menu-toggle {
+    color: rgb(255, 255, 255);
+    background-color: #b58900;
+    display: none; /* Default: hidden for desktop */
+  width: auto;       /* Ensure it only takes needed width */
+  min-width: unset;  /* Remove any inherited min-width */
+  flex-shrink: 0;    /* Prevent shrinking, keeps icon size stable */
+}
+
+
+
+@media (max-width: 768px) {
+
+  .nav-links {
+    width: 140px;     /* Smaller width */
+    padding: 0.5rem;  /* Less space inside */
+    gap: 0.5rem;      /* Less gap between items */
+  }
+
+  .nav-links a {
+    font-size: 0.85rem; /* Smaller text */
+  }
+
+  .logout-btn {
+    padding: 0.3rem 0.6rem; /* Smaller button size */
+    font-size: 0.85rem;
+  }
+
+
+      .logo a {
+    font-size: 1rem; /* 60% of 1.5rem */
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #b58900;
+    padding: 1rem;
+    width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+}
