@@ -1,6 +1,7 @@
 import { useState } from "react";
 import API from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import "../index.css";
 
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -8,16 +9,44 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await API.post("/auth/register", form);
-    navigate("/login");
+    try {
+      await API.post("/auth/register", form);
+      navigate("/login");
+    } catch (err) {
+      console.error("Registration failed:", err);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input placeholder="Name" onChange={e => setForm({ ...form, name: e.target.value })} />
-      <input placeholder="Email" onChange={e => setForm({ ...form, email: e.target.value })} />
-      <input type="password" placeholder="Password" onChange={e => setForm({ ...form, password: e.target.value })} />
-      <button type="submit">Register</button>
-    </form>
+    <div className="register-wrapper">
+      <h2>Create an Account</h2>
+      <form onSubmit={handleSubmit} className="register-form">
+        <input
+          placeholder="Name"
+          value={form.name}
+          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          required
+        />
+        <input
+          placeholder="Email"
+          type="email"
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
+          required
+        />
+        <button type="submit" className="register-btn">Register</button>
+      </form>
+      <p className="login-link">
+        Already have an account?{" "}
+        <Link to="/login" className="login-btn">Login</Link>
+      </p>
+    </div>
   );
 }
