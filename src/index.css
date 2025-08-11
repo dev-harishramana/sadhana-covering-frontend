@@ -393,14 +393,14 @@ button:focus-visible {
 
 
 .gold-button {
-  background-color: #D4AF37;
-  color: #2E2B28;
-  font-weight: bold;
-  padding: 12px 20px;
+  background-color: #100c08;
+  color: white;
   border: none;
-  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .gold-button:hover {
@@ -681,23 +681,21 @@ button:focus-visible {
 /* Shipping Page Styles */
 .shipping-container {
   max-width: 500px;
-  width: 100%;
-  margin: 3rem auto; /* always centers horizontally */
-  background-color: #fff8e7;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  font-family: 'Playfair Display', serif;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(16, 12, 8, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 
 
 .shipping-heading {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #b8860b; /* gold */
   text-align: center;
+  color: #100c08;
   margin-bottom: 1.5rem;
+  font-size: 1.8rem;
 }
 
 .shipping-form {
@@ -706,20 +704,20 @@ button:focus-visible {
   gap: 1rem;
 }
 
+
 .shipping-form input {
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
-  border: 1px solid #b8860b;
-  border-radius: 8px;
-  font-family: inherit;
-  color: #2E2B28;
-  transition: all 0.3s ease;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
 .shipping-form input:focus {
+  border-color: #100c08;
   outline: none;
-  border-color: #D4AF37;
-  box-shadow: 0 0 6px #D4AF37;
 }
 
 
@@ -847,6 +845,23 @@ button:focus-visible {
     min-width: 100%;
   }
 }
+
+@media (max-width: 600px) {
+  .shipping-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .shipping-heading {
+    font-size: 1.5rem;
+  }
+
+  .gold-button {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
 
 /* For very small devices */
 @media (max-width: 480px) {
@@ -1425,5 +1440,23 @@ button:focus-visible {
   .login-form {
     padding: 1.5rem;
   }
+}
+
+.register-link a {
+  color: #007bff; /* blue link */
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.login-link a {
+  color: #007bff; /* blue link */
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
 }
 
