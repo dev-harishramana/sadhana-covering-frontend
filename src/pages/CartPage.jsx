@@ -30,9 +30,11 @@ const CartPage = () => {
   };
 
   return (
-    <div>
-      <h2>Your Cart</h2>
-      {cart.length === 0 && <p>No items in cart</p>}
+    <div className="cart-container">
+      <h2 className="cart-heading">Your Cart</h2>
+
+      {cart.length === 0 && <p className="empty-cart-text">No items in cart</p>}
+
       {cart.map((item) => (
         <CartItem
           key={item.product._id}
@@ -41,8 +43,12 @@ const CartPage = () => {
           onRemove={handleRemove}
         />
       ))}
+
       {cart.length > 0 && (
-        <button onClick={() => navigate('/shipping')}>
+        <button
+          onClick={() => navigate('/shipping')}
+          className="place-order-btn"
+        >
           Go to Place Order
         </button>
       )}
@@ -67,11 +73,15 @@ const CartItem = ({ item, onUpdate, onRemove }) => {
   };
 
   return (
-    <div style={{ marginBottom: '1rem' }}>
-      <h4>{item.product.name}</h4>
-      <p>
-        Qty:{' '}
+    <div className="cart-item">
+      <div className="cart-item-info">
+        <h4 className="cart-item-name">{item.product.name}</h4>
+
+        <label htmlFor={`qty-${item.product._id}`} className="qty-label">
+          Qty:
+        </label>
         <input
+          id={`qty-${item.product._id}`}
           type="number"
           min="1"
           value={inputQty}
@@ -82,9 +92,16 @@ const CartItem = ({ item, onUpdate, onRemove }) => {
               e.target.blur(); // trigger onBlur
             }
           }}
+          className="qty-input"
         />
-      </p>
-      <button onClick={() => onRemove(item.product._id)}>Remove</button>
+      </div>
+      <button
+        onClick={() => onRemove(item.product._id)}
+        className="remove-btn"
+        aria-label={`Remove ${item.product.name} from cart`}
+      >
+        Remove
+      </button>
     </div>
   );
 };
