@@ -1,3 +1,4 @@
+
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -19,17 +20,33 @@ import OrderHistoryPage from "./pages/OrderHistoryPage";
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      {/* Redirect root to /home */}
+      <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
       {/* Wrap all pages with header inside Layout */}
       <Route element={<Layout />}>
+        {/* Public home page */}
+        <Route path="/home" element={<Home />} />
+
+        {/* Public product pages */}
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+
+        {/* Admin only */}
         <Route path="/admin/add" element={<CreateProductForm />} />
         <Route path="/admin/edit/:id" element={<EditProductForm />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
 
+        {/* User-protected pages */}
         <Route
           path="/order-history"
           element={
@@ -78,23 +95,8 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
       </Route>
     </Routes>
   );
 }
+
