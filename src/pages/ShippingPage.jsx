@@ -9,6 +9,7 @@ export default function ShippingPage() {
     city: '',
     postalCode: '',
     country: '',
+    mobileNumber: '',   // ✅ added
   });
 
   const handleChange = (e) => {
@@ -29,6 +30,13 @@ export default function ShippingPage() {
         <input name="city" placeholder="City" value={form.city} onChange={handleChange} required />
         <input name="postalCode" placeholder="Postal Code" value={form.postalCode} onChange={handleChange} required />
         <input name="country" placeholder="Country" value={form.country} onChange={handleChange} required />
+        <input
+          name="mobileNumber"
+          placeholder="Mobile Number"
+          value={form.mobileNumber}
+          onChange={handleChange}
+          required
+        />
         <button className="gold-button" type="submit">Continue</button>
       </form>
     </div>
