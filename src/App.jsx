@@ -1,102 +1,105 @@
-
 import { Routes, Route, Navigate } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import AdminDashboard from "./pages/AdminDashboard";
 import { ProtectedRoute } from "./router/ProtectedRoute";
-import ProductList from "./pages/ProductList";
-import ProductDetails from "./pages/ProductDetails";
-import CreateProductForm from "./pages/CreateProductForm";
-import EditProductForm from "./pages/EditProductForm";
-import CartPage from "./pages/CartPage";
-import PlaceOrderPage from './pages/PlaceOrderPage';
-import ShippingPage from "./pages/ShippingPage";
-import PaymentPage from "./pages/PaymentPage";
-import OrderSuccessPage from "./pages/OrderSuccessPage";
-import OrderHistoryPage from "./pages/OrderHistoryPage";
+
+// Lazy load pages
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const ProductList = lazy(() => import("./pages/ProductList"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails"));
+const CreateProductForm = lazy(() => import("./pages/CreateProductForm"));
+const EditProductForm = lazy(() => import("./pages/EditProductForm"));
+const CartPage = lazy(() => import("./pages/CartPage"));
+const PlaceOrderPage = lazy(() => import("./pages/PlaceOrderPage"));
+const ShippingPage = lazy(() => import("./pages/ShippingPage"));
+const PaymentPage = lazy(() => import("./pages/PaymentPage"));
+const OrderSuccessPage = lazy(() => import("./pages/OrderSuccessPage"));
+const OrderHistoryPage = lazy(() => import("./pages/OrderHistoryPage"));
 
 export default function App() {
   return (
-    <Routes>
-      {/* Redirect root to /home */}
-      <Route path="/" element={<Navigate to="/home" />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+    <Suspense fallback={<div className="text-center p-4">Loading...</div>}>
+      <Routes>
+        {/* Redirect root to /home */}
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-      {/* Wrap all pages with header inside Layout */}
-      <Route element={<Layout />}>
-        {/* Public home page */}
-        <Route path="/home" element={<Home />} />
+        {/* Wrap all pages with header inside Layout */}
+        <Route element={<Layout />}>
+          {/* Public home page */}
+          <Route path="/home" element={<Home />} />
 
-        {/* Public product pages */}
-        <Route path="/products" element={<ProductList />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
+          {/* Public product pages */}
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
 
-        {/* Admin only */}
-        <Route path="/admin/add" element={<CreateProductForm />} />
-        <Route path="/admin/edit/:id" element={<EditProductForm />} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
+          {/* Admin only */}
+          <Route path="/admin/add" element={<CreateProductForm />} />
+          <Route path="/admin/edit/:id" element={<EditProductForm />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* User-protected pages */}
-        <Route
-          path="/order-history"
-          element={
-            <ProtectedRoute>
-              <OrderHistoryPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <ProtectedRoute>
-              <CartPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/shipping"
-          element={
-            <ProtectedRoute>
-              <ShippingPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/payment"
-          element={
-            <ProtectedRoute>
-              <PaymentPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/place-order"
-          element={
-            <ProtectedRoute>
-              <PlaceOrderPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/order-success"
-          element={
-            <ProtectedRoute>
-              <OrderSuccessPage />
-            </ProtectedRoute>
-          }
-        />
-      </Route>
-    </Routes>
+          {/* User-protected pages */}
+          <Route
+            path="/order-history"
+            element={
+              <ProtectedRoute>
+                <OrderHistoryPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <CartPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/shipping"
+            element={
+              <ProtectedRoute>
+                <ShippingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <ProtectedRoute>
+                <PaymentPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/place-order"
+            element={
+              <ProtectedRoute>
+                <PlaceOrderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order-success"
+            element={
+              <ProtectedRoute>
+                <OrderSuccessPage />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
-
