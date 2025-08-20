@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Layout from "./components/Layout";
 import { ProtectedRoute } from "./router/ProtectedRoute";
+import Loader from "./components/Loader";
 
 // Lazy load pages
 const Home = lazy(() => import("./pages/Home"));
@@ -21,7 +22,7 @@ const OrderHistoryPage = lazy(() => import("./pages/OrderHistoryPage"));
 
 export default function App() {
   return (
-    <Suspense fallback={<div className="text-center p-4">Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         {/* Redirect root to /home */}
         <Route path="/" element={<Navigate to="/home" />} />
