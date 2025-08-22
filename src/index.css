@@ -1475,3 +1475,28 @@ button:focus-visible {
   text-decoration: underline;
 }
 
+.category-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.category-buttons button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid gray;
+  background: #f8f8ff;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-buttons button.active {
+  background: #100c08;
+  color: #fff;
+  border: 2px solid black;
+}
+
+/* ✅ Responsive: smaller buttons under 768px */
+
+
