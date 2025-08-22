@@ -73,23 +73,33 @@ export default function ProductList() {
           width: "100%",
         }}
       >
-        {/* Category Filter */}
-        <div className="category-filter" style={{ flex: "1 1 200px" }}>
-          <label htmlFor="category">Category: </label>
-          <select
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            style={{ width: "100%", padding: "6px" }}
-          >
-            <option value="">All</option>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))}
-          </select>
-        </div>
+          {/* Category Filter */}
+          {/* Category Filter */}
+{/* Category Filter */}
+<div className="category-filter" style={{ flex: "1 1 100%", marginBottom: "1rem" }}>
+  <h4 style={{ marginBottom: "0.5rem" }}>Category</h4>
+  <div className="category-buttons">
+    <button
+      onClick={() => setCategory("")}
+      className={category === "" ? "active" : ""}
+    >
+      All
+    </button>
+
+    {categories.map((cat) => (
+      <button
+        key={cat}
+        onClick={() => setCategory(cat)}
+        className={category === cat ? "active" : ""}
+      >
+        {cat}
+      </button>
+    ))}
+  </div>
+</div>
+
+
+
 
         {/* Sort Filter */}
         <div className="sort-filter" style={{ flex: "1 1 200px" }}>
