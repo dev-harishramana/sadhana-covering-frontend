@@ -110,7 +110,7 @@ export default function ProductList() {
       {/* Products Grid */}
       <div className="products-grid">
         {filteredProducts.length === 0 ? (
-          <p>No products found.</p>
+          <p>Products Loading Please Wait !</p>
         ) : (
           filteredProducts.map((p) => (
             <div key={p._id} className="product-card">
