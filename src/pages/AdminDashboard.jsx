@@ -39,6 +39,8 @@ export default function AdminDashboard() {
     <div className="admin-dashboard">
       <h2>Admin Dashboard</h2>
       <Link to="/admin/add" className="btn">+ Add Product</Link>
+      <Link to="/admin/orders">Customer Orders</Link>
+
       <table className="admin-table">
         <thead>
           <tr>
