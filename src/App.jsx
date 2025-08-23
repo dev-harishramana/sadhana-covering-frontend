@@ -18,6 +18,7 @@ const ShippingPage = lazy(() => import("./pages/ShippingPage"));
 const PaymentPage = lazy(() => import("./pages/PaymentPage"));
 const OrderSuccessPage = lazy(() => import("./pages/OrderSuccessPage"));
 const OrderHistoryPage = lazy(() => import("./pages/OrderHistoryPage"));
+const CustomerOrders = lazy(() => import("./pages/CustomerOrders"));
 
 export default function App() {
   return (
@@ -98,6 +99,16 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/admin/orders"
+            element={
+              <ProtectedRoute>
+                <CustomerOrders />
+              </ProtectedRoute>
+            }
+          />
+
+
         </Route>
       </Routes>
     </Suspense>
