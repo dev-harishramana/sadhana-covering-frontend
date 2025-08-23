@@ -1499,4 +1499,14 @@ button:focus-visible {
 
 /* ✅ Responsive: smaller buttons under 768px */
 
+@media (max-width: 768px) {
+  .category-buttons {
+    justify-content: center;
+  }
+
+  .category-buttons button {
+    flex: 1 1 calc(50% - 1rem); /* 2 per row */
+    max-width: 200px; /* optional, prevents buttons from stretching too wide */
+  }
+}
 
